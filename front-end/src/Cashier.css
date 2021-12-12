@@ -1,0 +1,41 @@
+body {
+    background-color: rgb(230,230,250);
+}
+.upperrow{
+    margin-top: 70px;
+}
+.twobuttons{
+    margin-left: 10px;
+}
+.amountonright{
+    text-align: center;
+}
+.clearfixe{
+    direction: rtl;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+}
+h1,h4{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+div{
+    margin-bottom: 5px;
+}
+.mystyle{
+    border-right: 1px solid grey;
+}
+#paymentHead{
+    border: 1px solid silver;
+    padding: 1em;
+    background-color: white;
+    color: grey;
+}
+.paymentOptions{
+    border: 1px solid silver;
+    padding: 1em;
+    background-color: white;
+    width: 70%;
+   color: grey;
+
+}

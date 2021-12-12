@@ -1,0 +1,55 @@
+body {
+    background-color: rgb(230,230,250);
+}
+.topcolumn{
+    /* border: 1px solid black; */
+    justify-content: end;
+    margin-bottom: 10px;
+}
+tr {
+    /* padding: auto; */
+    background-color: white;
+}
+Input::placeholder{
+    text-align: left;
+}
+a {
+    color:white;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+a:hover {
+    color:white;
+    text-decoration: none;
+}
+span {
+    color:white;
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    vertical-align: middle;
+}
+.tab-title {
+    color:rgb(100, 41, 117);
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.container-fluid {
+    margin-top: 40px;
+}
+.cards{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-inline: 3em;
+}
+.cardsimg{
+   height: 300px;
+}
+.cardtitle{
+    font-weight: bold;
+    color: rgb(100,41,117);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform:uppercase;
+    font-size: 20px;
+}
+
+

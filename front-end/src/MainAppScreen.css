@@ -1,0 +1,81 @@
+body {
+  background-color: rgb(230,230,250);
+}
+.brand {
+  background-color: rgb(100, 41, 117);
+  border-radius: 120px 0px 0px 120px;
+  vertical-align: middle;
+  background-image: url(./bg3.jfif);
+  background-repeat: no-repeat;
+  background-size: 160%;
+}
+.box {
+  margin-top: 5em;
+  height: 48em;
+  box-shadow: 0 0 10px grey;
+  border-radius: 120px 120px 120px 120px;
+}
+.login {
+  background-color: white;
+  border-radius: 0px 120px 120px 0px;
+  height: 100%;
+}
+#but {
+  background-color: rgb(100, 41, 117);
+  border-color: rgb(100, 41, 117);
+  width: 11.5em;
+  border-radius: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+form {
+  margin-top: 5em;
+}
+.rowss {
+  justify-content:center;
+  padding-top: 3em;
+}
+label {
+  color: grey;
+}
+input {
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-color: rgb(100, 41, 117);
+  
+}
+input:placeholder {
+  text-align: center;
+}
+input:focus {
+  outline: none;
+  background-color: white;
+}
+.text1 {
+  color: rgb(100, 41, 117);
+  margin-top: 0.9em;
+  font-size: 90px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-shadow: 5px 5px 10px rgba(151, 92, 185, 0.733);
+  margin-left: 10px;
+}
+.text11 {
+  color:rgb(100, 41, 117);
+  vertical-align: middle;
+  padding-top: 5px;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: italic;
+  letter-spacing: 0px;
+}
+.text2 {
+  color:rgb(100, 41, 117);
+  text-align: center;
+  margin-top: 6em;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(230,230,250);
+}
+#editbutton{
+    background-color:orange;
+    border-color: orange;
+    width: 7em;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#deletebutton{
+    background-color:red;
+    border-color: red;
+    width: 7em;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 1.2em;
+}
+#buttonCols{
+    display: flex;
+    justify-content:flex-end;
+}
+#addproductheading{
+    display: flex;
+    justify-content:center;
+    margin-left: 9em;
+}
+#buto{
+    background-color: rgb(100, 41, 117);
+    border-color: rgb(100, 41, 117);
+    width: 11.5em;
+    font-family: monospace;
+}

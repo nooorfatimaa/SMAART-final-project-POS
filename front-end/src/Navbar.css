@@ -1,0 +1,23 @@
+.navdd {
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    color: rgb(100, 41, 117);
+}
+.navbar{
+    background-color: rgb(100, 41, 117);
+    color: white;
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#collasible-nav-dropdown {
+    color: white;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 10px;
+}
+#collasible-nav-dropdown2 {
+    color: white;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

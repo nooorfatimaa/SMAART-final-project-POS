@@ -1,0 +1,18 @@
+#tabscolumn{
+    display: flex;
+     /* border:1px solid black; */
+     justify-content: center 
+}
+#monthlysalecol{
+    display: flex;
+    justify-content: center;
+}
+#noanim-tab-example{
+    color: black;
+} 
+.tab-title {
+    color:rgb(100, 41, 117);
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
