@@ -13,6 +13,7 @@ var authenticate = require('./authenticate')
 mongoose.connect('mongodb+srv://noooor:noor12345@cluster0.euyw8.mongodb.net/smaartDatabase?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true },() =>{console.log("connected")});
 
 // var adminRouter = require('./app_server/routes/admin');
+
 var userRouter = require('./app_server/routes/users');
 var customerRouter = require('./app_server/routes/customer');
 var cartRouter = require('./app_server/routes/cart');
@@ -40,6 +41,7 @@ app.use(cors());
 
 
 // app.use('/admin', adminRouter);
+app.use('/qrimagesFolder', express.static(path.join(__dirname,"/uploads")))
 app.use('/user', userRouter);
 app.use('/customers', customerRouter);
 app.use('/carts', cartRouter);

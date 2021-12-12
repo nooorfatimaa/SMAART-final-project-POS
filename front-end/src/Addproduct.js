@@ -16,8 +16,9 @@ function AddProduct(){
     const[pDesc,setPDesc] = useState("");
     const[pPrice,setPPrice] = useState();
     const[pQty,setPQty] = useState();
-    const[pImg,setPImg] = useState("https://image.shutterstock.com/image-vector/kids-vector-icon-260nw-1034577322.jpg");
+    // const[pImg,setPImg] = useState("https://image.shutterstock.com/image-vector/kids-vector-icon-260nw-1034577322.jpg");
     const[valid,setValid] = useState(false);
+    const[pImg,setPImg] = useState();
 
     useEffect(() => {
         getCategoryList();
@@ -64,29 +65,31 @@ function AddProduct(){
         return true;
     }
 
+    // const submitHandle2=(event)=>{
+    //     event.preventDefault();
+    //     console.log(pImg)
+
+    // }
+
     const submitHandle = (event)=> {
         event.preventDefault();
         // alert(PName, pCategory, pPrice, pQty, pDesc,pImg);
-        const data = {
-            "name": PName, 
-            "category": pCategory, 
-            "description": pDesc, 
-            "quantity": pQty, 
-            "price" : pPrice, 
-            "picture": pImg };
-        // alert(data);
+        const data = new FormData()
+
+        data.append("name", PName)
+        data.append("category", pCategory)
+        data.append("description", pDesc)
+        data.append("quantity", pQty)
+        data.append("price", pPrice)
+        data.append("file", pImg)
+       
+        alert(data);
+        console.log(pImg)
         if (valid) {
-            axios.post('http://localhost:5000/products/add', data,options).then(response => {
+            axios.post('http://localhost:5000/products/add', data).then(response => {
                 alert("product added successfully");
-                // console.log(data);
-                // if(response.ok) {
-                    
-                // }
-                // else {
-                //     var error = new Error(response.statusText)
-                //     error.response = response
-                //     throw error
-                // }
+                console.log(response.data._id)
+              
             });
             setPName("");
             setPDesc("");
@@ -117,7 +120,7 @@ function AddProduct(){
                     </Col>
                 </Row>
                 <Col sm='12'>
-                    <Form>
+                    <Form enctype="multipart/form-data"> 
                         <Row>
                             <Col sm='8'>
                                 <FormGroup>
@@ -166,7 +169,7 @@ function AddProduct(){
                                 <FormGroup>
                                     <Label for="exampleFile">Upload Picture</Label>
                                     <br/>
-                                    <Input type="file" name="file" id="exampleFile" />
+                                    <Input type="file" name="file" id="exampleFile" onChange={(e)=>{const file = e.target.files[0];setPImg(file)}} />
                                 </FormGroup>
                             </Col>
                         </Row>
