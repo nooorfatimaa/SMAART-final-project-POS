@@ -49,8 +49,8 @@ module.exports.editProduct = async (req, res, next) => {
         {  // name: body.name,
             // category: body.name,
             // description: body.description,
-            quantity: body.quantity, 
-            price: body.price,
+            quantity: req.body.quantity, 
+            price: req.body.price,
             // picture: body.picture,
         }, 
         function(error, results) {

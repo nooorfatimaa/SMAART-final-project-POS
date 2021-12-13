@@ -17,6 +17,8 @@ function ProductEdit(){
     // const [prodID, setprodID] = useState()
     const [prodData, setprodData] = useState({})
     const [catName, setCatName] = useState('')
+    const [quantity, setQuantity] = useState('')
+    const [price, setPrice] = useState('')
     const [disabledCheck, setdisabledCheck] = useState(true)
     const location = useLocation()
     const {_id}  = location.state
@@ -29,18 +31,27 @@ function ProductEdit(){
         axios.get(`http://localhost:5000/products/${_id}`,options).then((response) => {
         const data = response.data;
         setprodData(data);
+        setQuantity(data.quantity)
+        setPrice(data.price)
         //console.log(data)
         }).catch(() => {console.log('unable to receive data'); console.log(options)
         });
     }
 
-    // const handleSubmit=()=>{
-    //     data = {
-    //     }
-    //     axios.put(`http://localhost:5000/categories/edit/${_id}`, data, options).then((response)=>{
-    //         alert("Data Modified Successfully")
-    //     }).catch((err)=>{console.log(err)})
-    // }
+    const handleSubmit=(e)=>{
+        
+        e.preventDefault()
+        
+    
+        axios.put(`http://localhost:5000/products/edit/${_id}`, {
+            quantity: quantity,
+            price: price 
+        }).then((response)=>{
+            console.log(response)
+            alert("Data Modified Successfully")
+        
+        }).catch((err)=>{console.log(err)})
+    }
     
     return(
         <div>            
@@ -99,50 +110,24 @@ function ProductEdit(){
                             <Col sm='6'>
                                 <FormGroup>
                                     <Label for="quantity">Quantity</Label>
-                                    <Input type="number" name="quantity" id="exampleEmail" value={prodData.quantity} disabled={disabledCheck}/>
+                                    <Input type="number" name="quantity" id="exampleEmail" value={quantity}  onChange={(e)=>{setQuantity(e.target.value)}} disabled={disabledCheck} />
                                 </FormGroup>
                             </Col>
                             <Col sm='6'>
                                 <FormGroup>
                                     <Label for="price">Price</Label>
-                                    <Input type="number" name="price" id="exampleEmail" value={prodData.price} disabled={disabledCheck}/>
+                                    <Input type="number" name="price" id="exampleEmail" value={price}  onChange={(e)=>{setPrice(e.target.value)}} disabled={disabledCheck}/>
                                 </FormGroup>
                             </Col>
                         </Row>
                        
                         <Row>
                             <Col sm='12' className='mt-4' id="bottomcolumn">
-                                <Button id="bottombutton"  >Modify Product</Button>
+                                <Button id="bottombutton" onClick={(e)=>{handleSubmit(e)}}>Modify Product</Button>
                             </Col>
                         </Row>
                     </Form>
 
-
-                        {/* <Table  responsive>
-                            
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Product Name</th>
-                                    <td>{prodData.name}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Category</th>
-                                    <td>{catName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Quantity</th>
-                                    <td>{prodData.quantity}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Price</th>
-                                    <td>{prodData.price}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Description</th>
-                                    <td>{prodData.description}</td>
-                                </tr>
-                            </tbody>
-                        </Table> */}
                     </Col>
                     <Col md='3' className="mt-5 offset-1">
                         <br/> <br/> <br/> <br/>
