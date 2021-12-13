@@ -7,14 +7,14 @@ module.exports.getProducts = async (req, res, next) => {
             return res.status(400).json(err)
         }
         if(!products.length) {
-            return res.status(200).json("Products not found") //change code to 404 when data added
+            return res.status(404).json("Products not found") //change code to 404 when data added
         }
         return res.status(200).json(products)
     }).catch(err => console.log(err))
 }
 
 module.exports.getProductById = async (req, res, next) => {
-    await Product.findById(req.params.id)
+    await Product.findById(req.params.id).populate('category')
         .then((product) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -46,12 +46,12 @@ module.exports.deleteProduct = async (req, res, next) => {
 module.exports.editProduct = async (req, res, next) => {
     await Product.findOneAndUpdate(
         { _id: req.params.id }, 
-        {   name: body.name,
-            category: body.name,
-            description: body.description,
+        {  // name: body.name,
+            // category: body.name,
+            // description: body.description,
             quantity: body.quantity, 
             price: body.price,
-            picture: body.picture,
+            // picture: body.picture,
         }, 
         function(error, results) {
             if (error) {

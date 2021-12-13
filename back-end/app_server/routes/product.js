@@ -46,11 +46,12 @@ router.post('/add', upload.single('file'), (req,res)=>{
     
     }).catch(err => console.log(err))
 });
+
 // router.post('/add', auth.isUser, auth.isAdmin, controller.addProduct);
 
 router.delete('/delete/:id',auth.isUser,auth.isAdmin, controller.deleteProduct);
 
-router.put('/edit/:id',auth.isUser,auth.isAdmin, controller.editProduct);
+router.put('/edit/:id', controller.editProduct);
 
 router.get('/cat/:name', controller.getProductsByCategory)
 

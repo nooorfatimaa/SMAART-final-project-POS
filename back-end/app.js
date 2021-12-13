@@ -41,6 +41,7 @@ app.use(cors());
 
 
 // app.use('/admin', adminRouter);
+app.use('/prodImagesFolder', express.static(path.join(__dirname,"/products")))
 app.use('/qrimagesFolder', express.static(path.join(__dirname,"/uploads")))
 app.use('/user', userRouter);
 app.use('/customers', customerRouter);

@@ -24,10 +24,8 @@ function Product(){
 
 
   useEffect(() => {
-   
     getProductList();
     getCategoryList();
-   
   },[]);
 
   const options = {
@@ -107,9 +105,9 @@ function Product(){
         {products.map(product =>{
           return(
             <Col sm='4' className="mb-5">
-              <Link to={`/admin/merchandise/product/${product.id}`}>
+              <Link to={{pathname:`/admin/merchandise/product/${product._id}`, state:{ _id : product._id } }}>
                 <Card className='cards'>
-                  <CardImg className='cardsimg' top  width="100%" src={product.picture} alt="Card image" />
+                  <CardImg className='cardsimg' top  width="100%" src={`http://localhost:5000/prodImagesFolder/${product._id}.png`} alt="Card image" />
                   <CardBody body className="text-center">
                     <CardTitle className="cardtitle" tag="h5">{product.name}</CardTitle>
                     <CardSubtitle tag="h6" className="mt-2 mb-2 text-muted">{product.category.name}</CardSubtitle>
