@@ -95,7 +95,10 @@ export default function Invoice(){
             <Link to="/pos">
                 <Button className="dark">Done</Button>
             </Link>
-            <Link to='/pos/checkout/payment'>
+            <Link to={{
+                pathname: '/pos/checkout/payment',
+                state: {price: details.cart.totalPrice}
+            }}>
             <Button style={{marginLeft: "85%"}} onClick={() => <Stripe />}>Pay through Stripe</Button>
             </Link>
         </div>

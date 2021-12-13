@@ -23,6 +23,7 @@ const DailySale = () => {
       console.error(err);
     }
   };
+
   useEffect(() => {
     todaysale()
   },[]);
@@ -41,12 +42,8 @@ const DailySale = () => {
       <Card border="success" bg="success" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
         <Card.Header>Amount</Card.Header>
           <Card.Body>
-            {console.log(dailyCart)}
-          <Card.Title>Total Amount {dailyCart.map(single => {
-            let sum = 0;
-            sum += single.cart.totalPrice
-            return sum
-          })}</Card.Title>
+           
+          <Card.Title>Total Amount {dailyCart.reduce((sum, item) => sum + item.cart.totalPrice, 0)}</Card.Title>
           <Card.Text>
           Total amount made on {new Date().toString()}
           </Card.Text>
@@ -87,18 +84,16 @@ const DailySale = () => {
 
 const MonthlySale = () => {
   const [monthlyCart, setMonthlyCart] = useState([])
-  const [sum, setSum] = useState(0)
-  var x = 0
   const monthlySale = async () => {
     try {
       let res = await axios.get('/carts')
       res.data.map(single => {
+        
         let monthFromCart = single.createdAt.split("-")[1]
         let thisDate = new Date()
         let thisMonth = thisDate.getMonth() + 1
         if (thisMonth == monthFromCart) {
           setMonthlyCart(prev => [...prev, single])
-          
         }
       })
     } catch (err) {
@@ -116,22 +111,16 @@ const MonthlySale = () => {
           <Card.Body>
           <Card.Title>Total Sales {monthlyCart.length}</Card.Title>
           <Card.Text>
-          Total number of sales done on {new Date().toString()}
+          Total number of sales done in {new Date().toString().slice(3,7)} {new Date().toString().slice(10,15)}
           </Card.Text>
         </Card.Body>
       </Card>
       <Card border="success" bg="success" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
         <Card.Header>Amount</Card.Header>
           <Card.Body>
-          <Card.Title>Total Amount {monthlyCart.map(single => {
-            let sum = 0;
-            sum = parseInt(single.cart.totalPrice)
-            return sum
-            // x = sum + single.cart.totalPrice
-            // return sum
-          })}</Card.Title>
+          <Card.Title>Total Amount {monthlyCart.reduce((sum, item) => sum + item.cart.totalPrice, 0)}</Card.Title>
           <Card.Text>
-          Total amount made on {new Date().toString()}
+          Total amount made in {new Date().toString().slice(3,7)} {new Date().toString().slice(10,15)}
           </Card.Text>
         </Card.Body>
       </Card>

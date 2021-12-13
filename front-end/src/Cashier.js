@@ -8,7 +8,7 @@ import Cards from "react-credit-cards";
 import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
 import { HiCash } from "react-icons/hi";
 import { AiFillBank } from "react-icons/ai";
-import { NavbarCashier } from "./Navbar.js";
+import { NavbarCashier, NavbarCustom } from "./Navbar.js";
 import axios from "axios";
 
 const CreditCard = () => {
@@ -109,7 +109,6 @@ function Cashier() {
       responseType: "text",
     },
   };
-
   const getcart = () => {
     axios
       .get("/customers")
@@ -191,7 +190,18 @@ function Cashier() {
   return (
     <div>
       
-      <NavbarCashier />
+      {localStorage.user === "shahzad" ? <NavbarCustom 
+        title="POS"
+        dd1="Dashboard"
+        dd1Route="Dashboard"
+        dd2="Sales Analysis"
+        dd2Route="sales"
+        dd3="Merchandise Management"
+        dd3Route="merchandise"
+        dd4="Customer Details"
+        dd4Route="customer"
+        dd5="Cashier Registration"
+        dd5Route="cashier"/> : <NavbarCashier />}
       <Row className="mt-5">
         <Col md="2">
           <Dropdown>
@@ -287,6 +297,7 @@ function Cashier() {
                 }}
               >
                 <Button onClick={() => confirmCart(renderedCart[0]._id)}>
+                
                   Proceed to checkout
                 </Button>
               </Link>

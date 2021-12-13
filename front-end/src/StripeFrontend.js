@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios';
@@ -6,11 +6,11 @@ import axios from 'axios';
 const ip = 'http://localhost:5000/'
 
 
-function Stripe(){
-  console.log('working')
+function Stripe(props){
+  console.log(props.history.location.state.price)
   const [prod, setProduct] = useState({
     name:"test product",
-    price:"1",
+    price:props.history.location.state.price,
     productBy:"SMAART"
   })
 
@@ -36,7 +36,7 @@ function Stripe(){
     stripeKey='pk_test_51K4hcKASrElzPBPwVwGOBDflnpnJ2m7yp5aAioycp9YZydVwHCLzmMIEry9MRLrHMiTCEpFf13dokiOaE5mQXZOj00vkHKJgyK'
     token={do_payment} //responsible for firing things
     name="Proceed Now"
-    amount={prod.price * 100}
+    amount={(prod.price*100) / 170}
     >
     <button>Pay Now</button>
     </StripeCheckout>
