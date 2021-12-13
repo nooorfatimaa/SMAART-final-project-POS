@@ -33,6 +33,7 @@ function ProductEdit(){
         setprodData(data);
         setQuantity(data.quantity)
         setPrice(data.price)
+        setCatName(data.category.name)
         //console.log(data)
         }).catch(() => {console.log('unable to receive data'); console.log(options)
         });
@@ -72,7 +73,7 @@ function ProductEdit(){
                             </h3>
                         </Col>
                         <Col sm='12' md='4' id="buttonCols">
-                            <Button id ="editbutton" className="topbutton" onClick={()=>{disabledCheck==true?setdisabledCheck(false):setdisabledCheck(true)}}>
+                            <Button id="buto" className="topbutton" onClick={()=>{disabledCheck==true?setdisabledCheck(false):setdisabledCheck(true)}}>
                                 <span className="mr-2"><BsPencil/></span>Edit
                             </Button>
                         </Col>
@@ -93,7 +94,7 @@ function ProductEdit(){
                                 <FormGroup>
                                     <Label for="categ">Category</Label>
                                     {/*  change to .category.name */}
-                                    <Input type="text" name="category" id = 'categ' value={prodData.category} disabled/>
+                                    <Input type="text" name="category" id = 'categ' value={catName} disabled/>
                                             
                                 </FormGroup>
                             </Col>

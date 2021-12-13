@@ -1,5 +1,5 @@
 import "./Reports.css";
-import { Table, Col, Row } from "reactstrap";
+import {Card} from 'react-bootstrap'
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import { NavbarCustom } from "./Navbar.js";
@@ -28,61 +28,55 @@ const DailySale = () => {
   },[]);
   return (
     <>
-      <Row className="mt-5">
-        <Col className="mt-3 ml-5 mr-5">
-          <Table hover>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Customers</th>
-                <th>Products</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row">09:00 AM</td>
-                <td>Moin</td>
-                <td>Shirt</td>
-                <td>3</td>
-                <td>400$</td>
-              </tr>
-              <tr>
-                <td scope="row">09:00 AM</td>
-                <td>Zahid</td>
-                <td>Shirt</td>
-                <td>1</td>
-                <td>20$</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+    <div style={{ display: 'flex'}}>
+      <Card border="primary" bg="primary" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
+        <Card.Header>Sales</Card.Header>
+          <Card.Body>
+          <Card.Title>Total Sales {dailyCart.length}</Card.Title>
+          <Card.Text>
+          Total number of sales done on {new Date().toString()}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      <Card border="success" bg="success" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
+        <Card.Header>Amount</Card.Header>
+          <Card.Body>
+            {console.log(dailyCart)}
+          <Card.Title>Total Amount {dailyCart.map(single => {
+            let sum = 0;
+            sum += single.cart.totalPrice
+            return sum
+          })}</Card.Title>
+          <Card.Text>
+          Total amount made on {new Date().toString()}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      </div>
       <div>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <LineChart data={dailyCart.map(singleCart => singleCart)}>
+        <ResponsiveContainer width="85%" aspect={3}>
+          <LineChart data={dailyCart.map(singleCart => singleCart)} margin={{top: 50, left: 200}}>
             <XAxis />
             <YAxis />
             <Line dataKey="cart.totalPrice" />
           </LineChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <ComposedChart height={500} width={400} margin={{top:20, right:20, left:20, bottom:20}} data={dailyCart.map(singleCart => singleCart)}>
+        <ResponsiveContainer width="85%" aspect={3}>
+          <ComposedChart height={500} width={400} margin={{top:20, right:20, left:20, bottom:20}} data={dailyCart.map(singleCart => singleCart)} margin={{top: 50, left: 200}}>
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis scale="band" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Area type="monotone" dataKey="cart.totalPrice" fill="#8884d8" stroke="#8884d8" />
-          <Bar dataKey="cart.totalPrice" barSize={20} fill="#413ea0" />
+          <Area type="monotone" dataKey="cart.totalPrice" fill="#9003fc" stroke="#8884d8" fillOpacity={0.2}/>
+          <Bar dataKey="cart.totalPrice" barSize={20} fill="#82ca9d" />
           <Line type="monotone" dataKey="cart.totalPrice" stroke="#ff7300" />
           <Scatter dataKey="cart.totalPrice" fill="red" />
           </ComposedChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <PieChart>
-            <Pie dataKey="cart.totalPrice" data={dailyCart.map(singleCart => singleCart)} fill="#8884d8" label />
+        <ResponsiveContainer width="85%" aspect={3}>
+          <PieChart margin={{top: 50, left: 200}}>
+            <Pie dataKey="cart.totalPrice" data={dailyCart.map(singleCart => singleCart)} outerRadius={200} innerRadius={120} fill="#9003fc" label />
           </PieChart>
         </ResponsiveContainer>
       </div>
@@ -90,35 +84,11 @@ const DailySale = () => {
   );
 };
 
-const WeeklySale = () => {
-  return (
-    <Row className="mt-5">
-      <Col className="mx-auto" sm="6">
-        <Table hover>
-          <thead>
-            <tr>
-              <th>Days</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">Monday</td>
-              <td>620$</td>
-            </tr>
-            <tr>
-              <td scope="row">Tuesday</td>
-              <td>1110$</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
-  );
-};
 
 const MonthlySale = () => {
   const [monthlyCart, setMonthlyCart] = useState([])
+  const [sum, setSum] = useState(0)
+  var x = 0
   const monthlySale = async () => {
     try {
       let res = await axios.get('/carts')
@@ -140,52 +110,57 @@ const MonthlySale = () => {
   }, [])
   return (
     <>
-    <Row className="mt-5">
-      <Col id="monthlysalecol" className="mx-auto" sm="6">
-        <Table hover>
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">Januaury</td>
-              <td>1000$</td>
-            </tr>
-            <tr>
-              <td scope="row">Feburary</td>
-              <td>200$</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
+    <div style={{ display: 'flex'}}>
+      <Card border="primary" bg="primary" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
+        <Card.Header>Sales</Card.Header>
+          <Card.Body>
+          <Card.Title>Total Sales {monthlyCart.length}</Card.Title>
+          <Card.Text>
+          Total number of sales done on {new Date().toString()}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      <Card border="success" bg="success" style={{ width: '18rem', margin: '10px', marginLeft: '250px'}} className="mb-2">
+        <Card.Header>Amount</Card.Header>
+          <Card.Body>
+          <Card.Title>Total Amount {monthlyCart.map(single => {
+            let sum = 0;
+            sum = parseInt(single.cart.totalPrice)
+            return sum
+            // x = sum + single.cart.totalPrice
+            // return sum
+          })}</Card.Title>
+          <Card.Text>
+          Total amount made on {new Date().toString()}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      </div>
     <div>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <LineChart data={monthlyCart.map(singleCart => singleCart)}>
+        <ResponsiveContainer width="85%" aspect={3} >
+          <LineChart data={monthlyCart.map(singleCart => singleCart)} margin={{top: 50, left: 200}}>
+          <CartesianGrid strokeDasharray="3 3" />
             <XAxis />
             <YAxis />
-            <Line dataKey="cart.totalPrice" />
+            <Line dataKey="cart.totalPrice" stroke="#9003fc"/>
           </LineChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <ComposedChart height={500} width={400} margin={{top:20, right:20, left:20, bottom:20}} data={monthlyCart.map(singleCart => singleCart)}>
+        <ResponsiveContainer width="85%" aspect={3}>
+          <ComposedChart height={500} width={400}  data={monthlyCart.map(singleCart => singleCart)} margin={{top: 50, left: 200}}>
           <CartesianGrid stroke="#f5f5f5" />
           <XAxis scale="band" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Area type="monotone" dataKey="cart.totalPrice" fill="#8884d8" stroke="#8884d8" />
-          <Bar dataKey="cart.totalPrice" barSize={20} fill="#413ea0" />
+          <Area type="monotone" dataKey="cart.totalPrice" fill="#9003fc" stroke="#8884d8" fillOpacity={0.2}/>
+          <Bar dataKey="cart.totalPrice" barSize={20} fill="#82ca9d" />
           <Line type="monotone" dataKey="cart.totalPrice" stroke="#ff7300" />
           <Scatter dataKey="cart.totalPrice" fill="red" />
           </ComposedChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <PieChart>
-            <Pie dataKey="cart.totalPrice" data={monthlyCart.map(singleCart => singleCart)} fill="#8884d8" label />
+        <ResponsiveContainer width="85%" aspect={3}>
+          <PieChart margin={{top: 50, left: 200}}>
+            <Pie dataKey="cart.totalPrice" data={monthlyCart.map(singleCart => singleCart)} outerRadius={200} innerRadius={120} fill="#9003fc" label />
           </PieChart>
         </ResponsiveContainer>
       </div>
@@ -193,38 +168,6 @@ const MonthlySale = () => {
   );
 };
 
-const TopProduct = () => {
-  return (
-    <Row className="mt-5">
-      <Col className="mt-3 ml-5 mr-5">
-        <Table hover>
-          <thead>
-            <tr>
-              <th>Total</th>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td scope="row">120$</td>
-              <td>Rainbow Shirt</td>
-              <td>10</td>
-              <td>6000$</td>
-            </tr>
-            <tr>
-              <td scope="row">100$</td>
-              <td>Browny</td>
-              <td>15</td>
-              <td>2000$</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
-  );
-};
 
 function SalesAnalysis() {
   return (
@@ -255,13 +198,7 @@ function SalesAnalysis() {
         >
           <DailySale />
         </Tab>
-        <Tab
-          eventKey="Weekly Sales"
-          title="Weekly Sales"
-          tabClassName="tab-title"
-        >
-          <WeeklySale />
-        </Tab>
+        
         <Tab
           eventKey="Monthly Sales"
           title="Monthly Sales"
@@ -269,13 +206,7 @@ function SalesAnalysis() {
         >
           <MonthlySale />
         </Tab>
-        <Tab
-          eventKey="Top Products"
-          title="Top Products"
-          tabClassName="tab-title"
-        >
-          <TopProduct />
-        </Tab>
+        
       </Tabs>
     </div>
   );

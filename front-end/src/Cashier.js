@@ -190,6 +190,7 @@ function Cashier() {
 
   return (
     <div>
+      
       <NavbarCashier />
       <Row className="mt-5">
         <Col md="2">

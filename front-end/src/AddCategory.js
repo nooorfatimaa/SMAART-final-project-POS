@@ -74,17 +74,7 @@ function AddCategory(){
                                     <Input type="textarea" name="text" id="exampleText" />
                                 </FormGroup>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col sm='12'>
-                                <FormGroup>
-                                    <Label for="exampleFile">Upload Image</Label>
-                                    <br/>
-                                    <Input type="file" name="file" id="exampleFile" />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
+                        
                             <Col sm='12' className='mt-4' id="bottomcolumn">
                                 <Button id="bottombutton">Add Category</Button>
                             </Col>

@@ -55,18 +55,18 @@ export default function CustomerInfo() {
             <Table hover>
                     <thead>
                         <tr>
-                        <th>Name</th>
-                        <th>Contact</th>
                         <th>Photo</th>
+                        <th>Name</th>
+                        <th>Id</th>
                         </tr>
                     </thead>
                     <tbody>
                     {customer.map(customers =>{
                         return(
                         <tr>
-                        <td><img height = "200px" width="200px" src={customers.picture}></img></td>
+                        <td><img height = "200px" width="200px" src={`http://localhost:5000/CustomImagesFolder/${customers._id}.png`}></img></td>
                         <th scope="row">{customers.name}</th>
-                        <td>{customers.contactNo}</td>      
+                        <td>{customers._id}</td>      
                         </tr>
                      )})
                         }
