@@ -5,10 +5,40 @@ import {NavbarCustom} from './Navbar.js';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from './authentication'
+import axios from 'axios';
 
 var options = auth()
 
+
+
+
 function AddCategory(){
+
+
+    const [name, setname]= useState()
+    const [catcode, setcatcode]= useState()
+    const [description, setdescription]= useState()
+
+    const submitHandle=(e)=>{
+        e.preventDefault();
+        
+        const data = {
+          
+            "name": name,
+            "code": catcode,
+            "description": description
+        }
+
+        axios.post('http://localhost:5000/categories/add', data).then(response => {
+            alert("Category added successfully");
+            console.log(response.data._id)
+          
+        }).catch((err)=>{console.log(err)})
+        
+    
+    }
+    
+
     const [CnameError, setCNameError] = useState("");
     const[Cname,setCName] = useState("");
 
@@ -63,7 +93,7 @@ function AddCategory(){
                             <Col sm='4' id="categorycolumn">
                                 <FormGroup>
                                     <Label for="exampleSelect">Category Code</Label>
-                                    <Input type="text" name="select" id="exampleSelect" placeholder="Enter code here" required/>
+                                    <Input type="text" name="select" value={catcode} id="exampleSelect" placeholder="Enter code here" onChange={(e)=>{setcatcode(e.target.value)}} required/>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -71,12 +101,12 @@ function AddCategory(){
                             <Col sm='12'>
                                 <FormGroup>
                                 <Label for="exampleText">Description</Label>
-                                    <Input type="textarea" name="text" id="exampleText" />
+                                    <Input type="textarea" name="text" id="exampleText" value={description} onChange={(e)=>{setdescription(e.target.value)}}/>
                                 </FormGroup>
                             </Col>
                         
                             <Col sm='12' className='mt-4' id="bottomcolumn">
-                                <Button id="bottombutton">Add Category</Button>
+                                <Button id="bottombutton" onclick={(e)=>{submitHandle(e)}}>Add Category</Button>
                             </Col>
                         </Row>
                     </Form>

@@ -13,12 +13,12 @@ var UserSchema = new Schema({
         default:''
     },
     counterNo : {
-        type: Number,
+        type: String,
         default:''
         // required: true,
     },
     dOb : {
-        type: Date,
+        type: String,
         default:''
         // required: false,
     },

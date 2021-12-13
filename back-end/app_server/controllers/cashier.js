@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 
 module.exports.getCashiers = async (req, res, next) => {
-    await User.find({role: 'cashier'}, (err,cashiers) => {
+    await User.find({admin:false}, (err,cashiers) => {
         if(err) {
             return res.status(400).json(err)
         }

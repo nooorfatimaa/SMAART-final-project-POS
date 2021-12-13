@@ -6,7 +6,7 @@ import {Row, Col, Container, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import Swal from 'sweetalert2'
 function Main() {
   const[username,setUsername] = useState("");
   const[password,setPassword] = useState("");
@@ -27,7 +27,12 @@ function Main() {
   
     axios.post('http://localhost:5000/user/login', data).then(response=>{
     
-    alert("loged in successfully");
+      Swal.fire(
+        'Logged in!',
+        'You have been successfully logged in!',
+        'success'
+      )
+
     
     localStorage.setItem('id_token', JSON.stringify(response.data.token))
     localStorage.setItem('user', response.data.user.username)

@@ -3,8 +3,64 @@ import { Row,Col,Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {NavbarCustom} from './Navbar.js';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function AddCashier(){
+
+    const [cashName, setCashName] = useState('')
+    const [counterNo, setCounterNo] = useState('')
+    const [address, setAddress] = useState('')
+    const [contactNo, setContactNo] = useState('')
+    const [Date, setDate] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+
+    const submitHandle=(e)=>{
+
+        
+        e.preventDefault();
+        
+        const data = {
+            // "name": cashName,
+            // "counterNo": counterNo,
+            // "address": address,
+            // "contactNo": contactNo,
+            "username": username,
+            "password": password
+        }
+
+        alert(password)
+
+        // const data = new FormData()  
+        // data.append("name", cashName)
+        // data.append("counterNo", counterNo)
+        // data.append("address", address)
+        // data.append("contactNo", contactNo)
+        // data.append("username", username)
+        // data.append("password", password)
+
+        console.log(data)
+        
+        axios.post('http://localhost:5000/user/signup', data).then(response => {
+            alert("User Added Successfully");
+            console.log(response.data._id)
+          
+        }).catch((err)=>{console.log(err)})
+
+        setCashName('')
+        setCounterNo('')
+        setAddress('')
+        setContactNo('')
+        setUsername('')
+        setPassword('')
+
+    }
+
+    
+
+
+    
     return(
         <div>
             <NavbarCustom title="Cashier Registration" dd1="Dashboard" dd1Route="dashboard" dd2="POS" dd2Route="pos" dd3="Merchandise Management" dd3Route="merchandise" dd4="Customer Details" dd4Route="customer" dd5="Sales Analysis" dd5Route="sales"/>
@@ -29,14 +85,14 @@ function AddCashier(){
                             <Col sm='8'>
                                 <FormGroup>
                                         <Label for="productnamel">Cashier Name</Label>
-                                        <Input type="text" name="productname" id="exampleEmail" placeholder="Enter name here" />
+                                        <Input type="text" name="productname" id="exampleEmail" value={cashName} placeholder="Enter name here" onChange={(e)=>{setCashName(e.target.value);}}/>
                                 </FormGroup>
                             </Col>
                             <Col sm='4' id="categorycolumn">
                                 <FormGroup>
                                     <Label for="exampleSelect">Counter number</Label>
-                                    <Input type="select" name="select" id="exampleSelect">
-                                        <option>Counter 1</option>
+                                    <Input type="select" name="select" id="exampleSelect" value={counterNo} onChange={(e)=>{setCounterNo(e.target.value)}}>
+                                        <option selected>Counter 1</option>
                                         <option>Counter 2</option>
                                         <option>Counter 3</option>
                                         <option>Counter 4</option>
@@ -49,7 +105,7 @@ function AddCashier(){
                             <Col sm='12'>
                                 <FormGroup>
                                 <Label for="exampleText">Address</Label>
-                                    <Input type="textarea" name="text" id="exampleText" />
+                                    <Input type="textarea" name="text" id="exampleText" value={address} onChange={(e)=>{setAddress(e.target.value)}}/>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -57,13 +113,7 @@ function AddCashier(){
                             <Col sm='6'>
                                 <FormGroup>
                                     <Label for="number">Contact Number</Label>
-                                    <Input type="text" name="number" id="exampleEmail"/>
-                                </FormGroup>
-                            </Col>
-                            <Col sm='6'>
-                                <FormGroup>
-                                    <Label for="dob">Date of Birth</Label>
-                                    <Input type="date" name="dob" id="exampleEmail"/>
+                                    <Input type="text" name="number" id="exampleEmail" value ={contactNo} onChange={(e)=>{setContactNo(e.target.value)}}/>
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -71,32 +121,20 @@ function AddCashier(){
                             <Col sm='6'>
                                 <FormGroup>
                                     <Label for="username">Username</Label>
-                                    <Input type="text" name="username" id="exampleEmail"/>
+                                    <Input type="text" name="username" id="exampleEmail" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
                                 </FormGroup>
                             </Col>
                             <Col sm='6'>
                                 <FormGroup>
                                     <Label for="password">Password</Label>
-                                    <Input type="password" name="password" id="exampleEmail"/>
+                                    <Input type="password" name="password" id="exampleEmail" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col sm='12'>
-                                <FormGroup>
-                                <Label for="exampleFile">Upload Image</Label>
-                                <br/>
-                                <Input type="file" name="file" id="exampleFile" />
-                                {/* <FormText color="muted">
-                                This is some placeholder block-level help text for the above input.
-                                It's a bit lighter and easily wraps to a new line.
-                                </FormText> */}
-                                </FormGroup>
-                            </Col>
-                        </Row>
+                        
                         <Row>
                             <Col sm='12' className='mt-4' id="bottomcolumn">
-                                <Button id="bottombutton">Add Cashier</Button>
+                                <Button id="bottombutton" onClick={(e)=>{submitHandle(e)}}>Add Cashier</Button>
                             </Col>
                         </Row>
                     </Form>

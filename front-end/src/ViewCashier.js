@@ -62,37 +62,28 @@ function ViewCashier(){
                   <Table hover>
                     <thead>
                       <tr>
-                        <th>Image</th>
+                        {/* <th>Image</th> */}
+                        <th>Id</th>
                         <th>Name</th>
-                        <th>Counter No</th>
+                        <th>Address</th>
                         <th>Contact</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {cashier.map(cashiers=>{
+                        return(                    
+                      
                       <tr>
-                        <td scope="row"></td>
-                        <td>Ali</td>
-                        <td>2</td>
-                        <td>090078601</td>
-                      </tr>
-                      <tr>
-                        <td scope="row"></td>
-                        <td>Arsalan</td>
-                        <td>1</td>
-                        <td>090078601</td>
-                      </tr>
-                      <tr>
-                        <td scope="row"></td>
-                        <td>Muhammad Ali</td>
-                        <td>4</td>
-                        <td>090078601</td>
-                      </tr>
-                      <tr>
-                        <td scope="row"></td>
-                        <td>Zain</td>
-                        <td>1</td>
-                        <td>090078601</td>
-                      </tr>
+                          {/* <td scope="row"></td> */}
+                          <td>{cashiers._id}</td>
+                          <td>{cashiers.name}</td>
+                          <td>{cashiers.address}</td>
+                          <td>{cashiers.contactNo}</td>
+                      </tr> 
+
+                        )
+                      })}
+                    
                     </tbody>
                   </Table>
                 </Col>
