@@ -15,6 +15,7 @@ import Main from "./MainAppScreen.js";
 import Invoice from "./Invoice.js";
 import Axios from "axios";
 import Stripe from './StripeFrontend'
+import Unauthorized from './Unauth'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/pos" exact component={Cashier}/>
         <Route path="/pos/checkout" exact component={Invoice}/>
         <Route path="/pos/checkout/payment" exact component={Stripe}/>
+        <Route path="/unauthorized" exact component={Unauthorized}/>
       </Switch>
     </Router>
     

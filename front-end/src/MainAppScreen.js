@@ -14,6 +14,7 @@ function Main() {
   
   const[path,setPath] = useState("/");
   const [UnameError, setUNameError] = useState("");
+  const [PasswordError, setPasswordError] = useState("")
   const history = useHistory();
 
   const submitHandle=(e)=>{
@@ -33,7 +34,7 @@ function Main() {
         'success'
       )
 
-    
+    localStorage.setItem('Admin', response.data.user.admin )
     localStorage.setItem('id_token', JSON.stringify(response.data.token))
     localStorage.setItem('user', response.data.user.username)
     // console.log(response.data.token,  response.data.user)
@@ -47,6 +48,14 @@ function Main() {
   }
   
   }).catch((res)=>{
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: 'You probably have entered wrong username or password'
+    })
+    
     console.log(res)
   })
  
@@ -55,24 +64,29 @@ function Main() {
 
 
   const validate = (event) => {
+    
     var val = event.target.value;
     setUNameError("");
-    setPath("/");
+    // setPath("/");
     let error = "";
+    
     if (!val) {
       setUNameError("Username cannot be blank");
+    }
+    else if (val.length<=2 || val.length>=30){
+      setUNameError("Username should be between 2 to 30 characters.");
     }
     else if(error){
       setUNameError(error);
     }
     setUsername(val);
-    if(username.includes("admin")){
-      setPath("/admin/dashboard");
-    }
-    else if(username.includes("cashier")) {
-      setPath("/pos");
-    }
-    return true;
+    // if(username.includes("admin")){
+    //   setPath("/admin/dashboard");
+    // }
+    // else if(username.includes("cashier")) {
+    //   setPath("/pos");
+    // }
+    // return true;
   }
 
   const reset =() => {
@@ -107,7 +121,11 @@ function Main() {
             </Row> 
             <Row className="rowss">
               <Lock color="rgb(100, 41, 117)" size={20} />
-              <input type='password' placeholder='Enter password' value={password} name='password' onChange={(e)=>{setPassword(e.target.value)}}/>
+              <input type='password' placeholder='Enter password' value={password} name='password' onChange={(e)=>{
+                setPassword(e.target.value); 
+                e.target.value.length<6?setPasswordError("Password should be minimum 6 characters"):setPasswordError("")
+                }}/>
+              <div style={{color:"red"}}>{PasswordError}</div>
             </Row>
             <Row className="rowss">
               {/* <Link to={path}> */}

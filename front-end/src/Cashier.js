@@ -11,86 +11,86 @@ import { AiFillBank } from "react-icons/ai";
 import { NavbarCashier, NavbarCustom } from "./Navbar.js";
 import axios from "axios";
 
-const CreditCard = () => {
-  const [expiry, setExpiry] = useState("");
-  const [number, setNumber] = useState("");
-  const [cvc, Setcvc] = useState("");
-  const [focus, setFocus] = useState("");
-  const [name, setName] = useState("");
+// const CreditCard = () => {
+//   const [expiry, setExpiry] = useState("");
+//   const [number, setNumber] = useState("");
+//   const [cvc, Setcvc] = useState("");
+//   const [focus, setFocus] = useState("");
+//   const [name, setName] = useState("");
 
-  return (
-    <div className="mt-5">
-      <Cards
-        number={number}
-        name={name}
-        expiry={expiry}
-        cvc={cvc}
-        focused={focus}
-      />
-      <Form>
-        <InputGroup.Number
-          type="number"
-          name="number"
-          placeholder="Card Number"
-          value={number}
-          onfocus={(event) => setFocus(event.target.name)}
-          onchange={(event) => setNumber(event.target.value)}
-        />
-        <InputGroup.Text
-          className="mt-2"
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={name}
-          onfocus={(event) => setFocus(event.target.name)}
-          onchange={(event) => setName(event.target.value)}
-        />
-        <InputGroup
-          className="mt-2"
-          name="chrome-autofill-dummy2"
-          style={{ display: "none" }}
-          disabled
-        />
-        <Row>
-          <Col md="6">
-            <InputGroup.Text
-              className="mt-2"
-              type="number"
-              name="expiry"
-              placeholder="MM/YY Expiry"
-              value={expiry}
-              onfocus={(event) => setFocus(event.target.name)}
-              onchange={(event) => setExpiry(event.target.value)}
-            />
-          </Col>
-          <Col md="6">
-            <InputGroup.Text
-              className="mt-2"
-              type="number"
-              name="cvc"
-              placeholder="CVC"
-              value={cvc}
-              onfocus={(event) => setFocus(event.target.name)}
-              onchange={(event) => Setcvc(event.target.value)}
-            />
-          </Col>
-        </Row>
-        {/* <Button className="mt-2" className="btn btn-info">Pay</Button> */}
-        <FaCcMastercard
-          size={30}
-          color={"red"}
-          style={{ direction: "flex", float: "right" }}
-        />
-        <FaCcVisa
-          className="mr-2"
-          size={30}
-          color={"blue"}
-          style={{ direction: "flex", float: "right" }}
-        />
-      </Form>
-    </div>
-  );
-};
+//   return (
+//     <div className="mt-5">
+//       <Cards
+//         number={number}
+//         name={name}
+//         expiry={expiry}
+//         cvc={cvc}
+//         focused={focus}
+//       />
+//       <Form>
+//         <InputGroup.Number
+//           type="number"
+//           name="number"
+//           placeholder="Card Number"
+//           value={number}
+//           onfocus={(event) => setFocus(event.target.name)}
+//           onchange={(event) => setNumber(event.target.value)}
+//         />
+//         <InputGroup.Text
+//           className="mt-2"
+//           type="text"
+//           name="name"
+//           placeholder="Name"
+//           value={name}
+//           onfocus={(event) => setFocus(event.target.name)}
+//           onchange={(event) => setName(event.target.value)}
+//         />
+//         <InputGroup
+//           className="mt-2"
+//           name="chrome-autofill-dummy2"
+//           style={{ display: "none" }}
+//           disabled
+//         />
+//         <Row>
+//           <Col md="6">
+//             <InputGroup.Text
+//               className="mt-2"
+//               type="number"
+//               name="expiry"
+//               placeholder="MM/YY Expiry"
+//               value={expiry}
+//               onfocus={(event) => setFocus(event.target.name)}
+//               onchange={(event) => setExpiry(event.target.value)}
+//             />
+//           </Col>
+//           <Col md="6">
+//             <InputGroup.Text
+//               className="mt-2"
+//               type="number"
+//               name="cvc"
+//               placeholder="CVC"
+//               value={cvc}
+//               onfocus={(event) => setFocus(event.target.name)}
+//               onchange={(event) => Setcvc(event.target.value)}
+//             />
+//           </Col>
+//         </Row>
+//         {/* <Button className="mt-2" className="btn btn-info">Pay</Button> */}
+//         <FaCcMastercard
+//           size={30}
+//           color={"red"}
+//           style={{ direction: "flex", float: "right" }}
+//         />
+//         <FaCcVisa
+//           className="mr-2"
+//           size={30}
+//           color={"blue"}
+//           style={{ direction: "flex", float: "right" }}
+//         />
+//       </Form>
+//     </div>
+//   );
+// };
 
 function Cashier() {
   const [cart, setCart] = useState([]);
@@ -124,22 +124,22 @@ function Cashier() {
       });
   };
 
-  const inputToAddName = () => {
-    if (text == 1) {
-      return (
-        <Form className="mt-0">
-          <InputGroup.Text type="text" placeholder="Enter User Name" />
-          <Button
-            type="submit"
-            className="btn btn-info mt-2"
-            style={{ direction: "flex", float: "right" }}
-          >
-            Add Name
-          </Button>
-        </Form>
-      );
-    }
-  };
+  // const inputToAddName = () => {
+  //   if (text == 1) {
+  //     return (
+  //       <Form className="mt-0">
+  //         <InputGroup.Text type="text" placeholder="Enter User Name" />
+  //         <Button
+  //           type="submit"
+  //           className="btn btn-info mt-2"
+  //           style={{ direction: "flex", float: "right" }}
+  //         >
+  //           Add Name
+  //         </Button>
+  //       </Form>
+  //     );
+  //   }
+  // };
 
   const displayCart = (recievedCart) => {
     setRenderedCart([recievedCart]);
@@ -190,7 +190,7 @@ function Cashier() {
   return (
     <div>
       
-      {localStorage.user === "shahzad" ? <NavbarCustom 
+      {localStorage.Admin === "true" ? <NavbarCustom 
         title="POS"
         dd1="Dashboard"
         dd1Route="Dashboard"
@@ -219,7 +219,7 @@ function Cashier() {
           </Dropdown>
         </Col>
         <Col
-          md="6"
+          md="8"
           style={{
             borderRight: "1px solid silver",
             borderLeft: "1px solid silver",
@@ -304,7 +304,7 @@ function Cashier() {
             </span>
           </Col>
         </Col>
-        <Col md="4">
+        {/* <Col md="4">
           <div
             className="mt-5"
             style={{ direction: "flex", textAlign: "center" }}
@@ -353,7 +353,7 @@ function Cashier() {
           </Link>
           {inputToAddName()}
           {/* <CreditCard/> */}
-        </Col>
+        {/* </Col> */} 
       </Row>
     </div>
   );

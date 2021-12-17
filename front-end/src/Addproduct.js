@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import auth from './authentication'
+import Swal from 'sweetalert2'
 
 
 
@@ -83,11 +84,17 @@ function AddProduct(){
         data.append("price", pPrice)
         data.append("file", pImg)
        
-        alert(data);
+        // alert(data);
         console.log(pImg)
         if (valid) {
             axios.post('http://localhost:5000/products/add', data).then(response => {
-                alert("product added successfully");
+                
+                Swal.fire(
+                    'Successfull!',
+                    'Product has been added successfully!',
+                    'success'
+                  )    
+            // alert("product added successfully");
                 console.log(response.data._id)
               
             });
@@ -95,9 +102,18 @@ function AddProduct(){
             setPDesc("");
             setPPrice("");
             setPQty("");
+            
         }
         else {
-            alert("enter valid data first");
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Unable to add product!",
+                footer: 'You probably have entered wrong data'
+              })
+
+            // alert("enter valid data first");
         }
     }
 

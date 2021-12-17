@@ -10,6 +10,7 @@ import {NavbarCustom} from './Navbar.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
+import Swal from 'sweetalert2'
 
 
 function Product(){
@@ -61,7 +62,14 @@ function Product(){
 
   const deleteProduct = (id) => {
     axios.delete(`http://localhost:5000/products/delete/${id}`,options).then((response) => {
-      alert('deleted successfully');
+    
+      Swal.fire(
+        'Deleted!',
+        'Prodyct has been deleted successfully!',
+        'success'
+      )
+
+    // alert('deleted successfully');
       window.location.reload();
     }).catch(() => {console.log('unable to delete product')
     });
@@ -162,7 +170,7 @@ function Product(){
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText><IoMdSearch size={24}/></InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Search Category" value={typedcategory} onChange={(e)=>{searchCategory(e)}}/>
+                    <Input placeholder="Search Category by Name" value={typedcategory} onChange={(e)=>{searchCategory(e)}}/>
                   </InputGroup>
                   <span style={{color:"red", fontSize:"15px"}}>
                     {UnameError}

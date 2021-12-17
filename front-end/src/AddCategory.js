@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import auth from './authentication'
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 var options = auth()
 
@@ -14,33 +15,53 @@ var options = auth()
 
 function AddCategory(){
 
+    const [catcode, setcatcode]= useState("")
+    const [description, setdescription]= useState("")
+    const [CnameError, setCNameError] = useState("");
+    const[Cname,setCName] = useState("");
 
-    const [name, setname]= useState()
-    const [catcode, setcatcode]= useState()
-    const [description, setdescription]= useState()
 
-    const submitHandle=(e)=>{
-        e.preventDefault();
-        
+    const options = {
+    
+        headers: {'content-type':'application/json',
+        'Authorization':`Bearer ${JSON.parse(localStorage.getItem('id_token'))}`,
+        responseType: 'text'
+      }
+      };
+
+
+    const submitHandle=(event)=>{
+        // alert('wewe')
+        event.preventDefault();
+       
+
         const data = {
           
-            "name": name,
+            "name": Cname,
             "code": catcode,
             "description": description
         }
 
-        axios.post('http://localhost:5000/categories/add', data).then(response => {
-            alert("Category added successfully");
+        axios.post('http://localhost:5000/categories/add', data, options).then(response => {
+            
+        Swal.fire(
+                'Successfull!',
+                'Category has been added successfully!',
+                'success'
+              )       
+        
+        // alert("Category added successfully");
             console.log(response.data._id)
           
         }).catch((err)=>{console.log(err)})
+
+        setCName("")
+        setcatcode("")
+        setdescription("")
         
     
     }
     
-
-    const [CnameError, setCNameError] = useState("");
-    const[Cname,setCName] = useState("");
 
     const validate = (event) => {
         var val = event.target.value;
@@ -106,7 +127,7 @@ function AddCategory(){
                             </Col>
                         
                             <Col sm='12' className='mt-4' id="bottomcolumn">
-                                <Button id="bottombutton" onclick={(e)=>{submitHandle(e)}}>Add Category</Button>
+                                <Button id="bottombutton" onClick={(e)=>{submitHandle(e)}}>Add Category</Button>
                             </Col>
                         </Row>
                     </Form>

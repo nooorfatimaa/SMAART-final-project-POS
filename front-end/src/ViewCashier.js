@@ -11,6 +11,9 @@ import axios from 'axios';
 function ViewCashier(){
 
   const[cashier, setCashier] = useState([]);
+  const[forSearchingCashier, setsearchingCashier] = useState([]);
+  const [Error, setError] = useState('')
+  const[search, setsearch] = useState('')
 
   useEffect(() => {
     getCashierList();
@@ -24,10 +27,31 @@ function ViewCashier(){
   }
   };
 
+  const searchCashier=(e)=>{
+
+    if((/^[a-zA-Z1-9 ]*$/).test(e.target.value)){
+      
+      setError("")
+      setCashier(forSearchingCashier.filter(val=>val.name.includes((e.target.value).toLowerCase())))
+
+    }
+    else{
+      
+      setError("Only Alphabets and Numbers are Allowed")
+
+    }
+
+    setsearch(e.target.value)
+
+
+
+  }
+
   const getCashierList = () => {
     axios.get('http://localhost:5000/cashiers',options).then((response) => {
       const data = response.data;
       setCashier(data);
+      setsearchingCashier(data)
       console.log(data);
     }).catch(() => {
       console.log('unable to receive data')
@@ -45,8 +69,11 @@ function ViewCashier(){
             <InputGroupAddon addonType="prepend">
               <InputGroupText><IoMdSearch size={24}/></InputGroupText>
             </InputGroupAddon>
-              <Input placeholder="Search Cashier"/>
+              <Input placeholder="Search Cashier by Name" value={search} onChange={(e)=>{searchCashier(e)}}/>
           </InputGroup>
+          <span style={{color:"red", fontSize:"15px"}}>
+          {Error}
+          </span>
           <br/>
           <InputGroup></InputGroup>
         </Col>

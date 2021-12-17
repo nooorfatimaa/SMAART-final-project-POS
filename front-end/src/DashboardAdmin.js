@@ -15,6 +15,7 @@ import { MdEmail } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import auth from './authentication'
+import {NavbarCustom} from './Navbar.js';
 
 var options = auth()
 
@@ -132,6 +133,13 @@ function Dashboard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
+  const logoutF=()=>{
+    
+    localStorage.clear()
+  
+  
+  }
+
   return (
     <div>
       <Navbar collapseOnSelect expand="md" sticky="top" className="navbar">
@@ -141,12 +149,12 @@ function Dashboard() {
           <Nav className="ml-auto">
             <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggle nav>
-                <span>AdminName</span>
+                <span>Admin</span>
                 <IoPeople  style={{color: 'white', marginLeft:'4px'}} size={32}/>
               </DropdownToggle>
               <DropdownMenu id="collasible-nav-dropdown2">
                 <DropdownItem >
-                  <span className="navdd"><CgProfile/>{console.log(localStorage.getItem('user'))}</span>
+                  <span className="navdd"><CgProfile/> {localStorage.getItem('user')}</span>
                 </DropdownItem>
                 <NavDropdown.Divider />
                 <DropdownItem >
@@ -154,7 +162,7 @@ function Dashboard() {
                 </DropdownItem>
                 <NavDropdown.Divider />
                 <DropdownItem tag={Link} to="/">
-                  <span className="navdd"><IoMdLogOut/> Logout</span>
+                  <span className="navdd" onClick={(e)=>{logoutF()}}><IoMdLogOut/> Logout</span>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>

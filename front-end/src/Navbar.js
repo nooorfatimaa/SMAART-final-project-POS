@@ -14,9 +14,9 @@ function NavbarCustom(props){
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
     const logoutF=()=>{
+        
         localStorage.clear();
-        // this.authToken = null;
-        // this.user = null;
+      
     }
 
     return(
@@ -46,7 +46,7 @@ function NavbarCustom(props){
                         </DropdownToggle>
                         <DropdownMenu id="collasible-nav-dropdown2">
                             <DropdownItem >
-                                <span className="navdd"><CgProfile/>Admin</span>
+                                <span className="navdd"><CgProfile/> {localStorage.getItem('user')}</span>
                             </DropdownItem>
                             <NavDropdown.Divider />
                             <DropdownItem >
@@ -79,12 +79,12 @@ function NavbarCashier(props){
                 <Nav className="ml-auto">
                     <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
                         <DropdownToggle nav>
-                            <span>CashierName</span>
+                            <span>Cashier</span>
                             <IoPeople  style={{color: 'white', marginLeft:'4px'}} size={32}/>
                         </DropdownToggle>
                         <DropdownMenu id="collasible-nav-dropdown2">
                             <DropdownItem >
-                                <span className="navdd"><CgProfile/> Cashier</span>
+                                <span className="navdd"><CgProfile/> {localStorage.getItem('user')}</span>
                             </DropdownItem>
                             <NavDropdown.Divider />
                             <DropdownItem >

@@ -36,21 +36,34 @@ module.exports.login = function(req, res, next) {
         })
        
     } else {
+        res.send("Error")
         res.status(422)
         next(result.error)
     }
 
 }
 
+
 module.exports.signup = function(req,res,next){
-    const result = schema.validate(req.body)
-    if (!result.error){
-        user.findOne({username: req.body.username}).then((found) => {
-            if (found) {
-                const error = new Error('user already present')
-                res.status(409)
-                next(error)
-            } else {
+    // const result = schema.validate(req.body)
+    // if (!result.error){
+    //     user.findOne({username: req.body.username}).then((found) => {
+    //         if (found) {
+    //             const error = new Error('user already present')
+    //             res.status(409)
+    //             next(error)
+    //         } else {
+          const result = schema.validate(req.body)
+            if(!result.error){
+                user.findOne({username:req.body.username}).then((result)=>{
+                    if(result){
+                        const error = new Error('User Already Present')
+                        res.status(409)
+                        next(error)
+                    }
+                })
+            }
+            else{
                 user.register(new user({ username: req.body.username }),
                 req.body.password, (err, user) => {
                     if (err) {
@@ -89,12 +102,72 @@ module.exports.signup = function(req,res,next){
                         });
                     }
                 });
-            }
-        })  
-    } else {
-        res.status(422)
-        next(result.error)
-    }
-
+            // }
+        // })  
+    } 
 }
+    // else {
+    //     res.status(422)
+    //     next(result.error)
+    // }
+
+// }
+
+
+
+// module.exports.signup = function(req,res,next){
+//     const result = schema.validate(req.body)
+//     if (!result.error){
+//         user.findOne({username: req.body.username}).then((found) => {
+//             if (found) {
+//                 const error = new Error('user already present')
+//                 res.status(409)
+//                 next(error)
+//             } else {
+//                 user.register(new user({ username: req.body.username }),
+//                 req.body.password, (err, user) => {
+//                     if (err) {
+//                         res.statusCode = 500;
+//                         res.setHeader('Content-Type', 'application/json');
+//                         res.json({ err: err });
+//                     } else {
+//                         if (req.body.name)
+//                             user.name = req.body.name;
+//                         if (req.body.role)
+//                             user.role = req.body.role;
+//                         if (req.body.counterNo)
+//                             user.counterNo = req.body.counterNo;
+//                         if (req.body.dOb)
+//                             user.dOb = req.body.dOb;
+//                         if (req.body.address)
+//                             user.address = req.body.address;
+//                         if (req.body.contactNo)
+//                             user.contactNo = req.body.contactNo;
+//                         if (req.body.picture)
+//                             user.picture = req.body.picture;
+            
+//                         user.save((err, user) => {
+//                             if (err) {
+//                                 res.statusCode = 500;
+//                                 res.setHeader('Content-Type', 'application/json');
+//                                 res.json({ err: err });
+//                                 return;
+//                             } else {
+//                                 passport.authenticate('local')(req, res, () => {
+//                                     res.statusCode = 200;
+//                                     res.setHeader('Content-Type', 'application/json');
+//                                     res.json({ success: true, status: 'Registration Successful!' });
+//                                 });
+//                             }
+//                         });
+//                     }
+//                 });
+//             }
+//         })  
+//     } else {
+//         res.status(422)
+//         next(result.error)
+//     }
+
+// }
 
