@@ -2,12 +2,49 @@ import "./Invoice.css"
 import React, { useState } from 'react';
 import {Table, Col, Row, Button} from "react-bootstrap";
 import {useLocation, Link} from 'react-router-dom'
-import Stripe from './StripeFrontend'
+// import Stripe from './StripeFrontend'
+import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 
-export default function Invoice(){
+
+const ip = 'http://localhost:5000/'
+
+export default function Invoice(props){
+
     const location = useLocation()
+    const history = useHistory()
     const [details, setDetails] = useState(location.state.renderedCart[0])
+    const [prod, setProduct] = useState({
+        name:"test product",
+        price:props.history.location.state.price,
+        productBy:"SMAART"
+    })
+    console.log(props.history.location.state.price)
+
+
+  const do_payment=(tok)=>{
+    const body = {
+      tok,
+      prod
+    }
+    const options = {
+      "Content-Type": "application/json"
+    }
+
+    {localStorage.Admin==="true"? history.push("/admin/pos") :  history.push("/pos")}
+    
+
+    
+    return axios.post(`${ip}stripe/payment`, body).then((res)=>{
+        console.log("Response", res)
+        console.log("Status",res.status)
+      
+
+    }).catch((err)=>console.log(err))
+  }
+
     return(
         <div>
             <Col md='12' className="topcol" >
@@ -92,15 +129,19 @@ export default function Invoice(){
                 </Col>
                 </Row>
             </Col>
-            <Link to="/pos">
+            <Link to = {localStorage.Admin==="true"? "/admin/pos" : "/pos" } >
                 <Button className="dark">Done</Button>
             </Link>
-            <Link to={{
-                pathname: '/pos/checkout/payment',
-                state: {price: details.cart.totalPrice}
-            }}>
-            <Button style={{marginLeft: "85%"}} onClick={() => <Stripe />}>Pay through Stripe</Button>
-            </Link>
+         
+            <StripeCheckout
+                stripeKey='pk_test_51K4hcKASrElzPBPwVwGOBDflnpnJ2m7yp5aAioycp9YZydVwHCLzmMIEry9MRLrHMiTCEpFf13dokiOaE5mQXZOj00vkHKJgyK'
+                token={do_payment} //responsible for firing things
+                name="Proceed Now"
+                amount={(details.cart.totalPrice*100) / 170}
+            >
+            <Button style={{marginLeft: "85%"}}>Pay through Stripe</Button>
+            </StripeCheckout>
+        
         </div>
     )
 }

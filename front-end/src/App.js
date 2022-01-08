@@ -23,21 +23,23 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Main}/>
-        <Route path="/admin/dashboard" exact component={Dashboard}/>
-        <Route path="/admin/sales" exact component={SalesAnalysis}/>
-        <Route path="/admin/merchandise" exact component={Product}/>
-        <Route path="/admin/merchandise/product/:id" exact component={ProductEdit}/>
-        <Route path="/admin/merchandise/addproduct" exact component={AddProduct}/>
-        <Route path="/admin/merchandise/addcategory" exact component={AddCategory}/>
-        <Route path="/admin/customer" exact component={CustomerInfo}/>
-        <Route path="/admin/pos" exact component={Cashier}/>
-        <Route path="/admin/cashier" exact component={ViewCashier}/>
-        <Route path="/admin/cashier/addcashier" exact component={AddCashier}/>
-        <Route path="/pos" exact component={Cashier}/>
-        <Route path="/pos/checkout" exact component={Invoice}/>
-        <Route path="/pos/checkout/payment" exact component={Stripe}/>
+
+       <Route path="/" exact component={Main}/>
+       <Route path="/admin/dashboard" exact component={Dashboard} />
+       <Route path="/admin/sales" exact component={SalesAnalysis}/>
+      <Route path="/admin/merchandise" exact component={Product}/>
+      <Route path="/admin/merchandise/product/:id" exact component={ProductEdit}/>
+      <Route path="/admin/merchandise/addproduct" exact component={AddProduct}/>
+      <Route path="/admin/merchandise/addcategory" exact component={AddCategory}/>
+      <Route path="/admin/customer" exact component={CustomerInfo}/>
+      <Route path="/admin/pos" exact component={Cashier}/>
+      <Route path="/admin/cashier" exact component={ViewCashier}/>
+      <Route path="/admin/cashier/addcashier" exact component={AddCashier}/>
+      <Route path="/pos" exact component={Cashier}/>
+      <Route path="/pos/checkout" exact component={Invoice}/>
+      <Route path="/pos/checkout/payment" exact component={Stripe}/>
       </Switch>
+    
     </Router>
     
   );

@@ -70,6 +70,12 @@ function NavbarCashier(props){
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
+    const logoutF=()=>{
+        
+        localStorage.clear();
+      
+    }
+    
     return(
         <Col>
             <Navbar collapseOnSelect expand="md" sticky="top" className="navbar">
@@ -92,7 +98,7 @@ function NavbarCashier(props){
                             </DropdownItem>
                             <NavDropdown.Divider />
                             <DropdownItem tag={Link} to="/">
-                                <span className="navdd"><IoMdLogOut/> Logout</span>
+                                <span className="navdd"  onClick={(e)=>{logoutF()}}><IoMdLogOut/> Logout</span>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
